@@ -1,13 +1,14 @@
 package biz.paluch.logcapture.client;
 
-import biz.paluch.logcapture.ws.LogControlService;
-import biz.paluch.logcapture.ws.LogEntry;
-import org.junit.rules.TestName;
-import org.junit.runner.Description;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.rules.TestName;
+import org.junit.runner.Description;
+
+import biz.paluch.logcapture.ws.LogControlService;
+import biz.paluch.logcapture.ws.LogEntry;
 
 /**
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
@@ -109,9 +110,11 @@ public abstract class AbstractRemoteIntegrationLogWatcher extends TestName {
             try {
                 List<LogEntry> entries = entry.getValue().stopCollect(d.getClassName() + "." + d.getMethodName());
                 StringBuilder builder = new StringBuilder();
-                for (LogEntry logEntry : entries) {
-                    builder.append(logEntry.getMessage().replaceAll("\r\n", "\n").replaceAll("\r", "\n")
-                            .replaceAll("\n\n", "\n"));
+                if (entries != null) {
+                    for (LogEntry logEntry : entries) {
+                        builder.append(logEntry.getMessage().replaceAll("\r\n", "\n").replaceAll("\r", "\n")
+                                .replaceAll("\n\n", "\n"));
+                    }
                 }
                 if (!builder.toString().equals("")) {
                     results.put(key, builder.toString());

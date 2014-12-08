@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  */
-@WebService(name = "LogControlService")
+@WebService(name = "LogControlService",targetNamespace = "http://logging.paluch.biz/logcapture")
 public interface LogControlService {
 
     /**

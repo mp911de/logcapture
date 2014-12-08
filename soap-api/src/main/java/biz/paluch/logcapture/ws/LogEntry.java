@@ -1,10 +1,12 @@
 package biz.paluch.logcapture.ws;
 
+import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 
 /**
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  */
+@XmlType(namespace = "http://logging.paluch.biz/logcapture/model")
 public class LogEntry {
     private Date timestamp;
     private String message;

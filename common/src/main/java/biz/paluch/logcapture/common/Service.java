@@ -16,10 +16,10 @@ public class Service {
                     @Override
                     public int compare(MessageCollectionFactory o1, MessageCollectionFactory o2) {
                         if (o1.priority() > o2.priority()) {
-                            return 1;
+                            return -1;
                         }
                         if (o1.priority() < o2.priority()) {
-                            return -1;
+                            return 1;
                         }
                         return 0;
                     }

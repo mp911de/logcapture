@@ -16,12 +16,17 @@ import biz.paluch.logcapture.ws.LogEntry;
 public abstract class AbstractRemoteIntegrationLogWatcher extends TestName {
 
     private Map<String, LogControlService> services;
+    private boolean stackTraceOnIoErrors = false;
 
     /**
      *
      */
     public AbstractRemoteIntegrationLogWatcher() {
-        super();
+        this(false);
+    }
+
+    public AbstractRemoteIntegrationLogWatcher(boolean stackTraceOnIoErrors) {
+        this.stackTraceOnIoErrors = stackTraceOnIoErrors;
     }
 
     /**
@@ -46,6 +51,9 @@ public abstract class AbstractRemoteIntegrationLogWatcher extends TestName {
                     service.startCollect(d.getClassName() + "." + d.getMethodName());
                 } catch (Exception e) {
                     warn("Cannot obtain Remote logs for: " + lastEntry.getKey() + ": " + e.getMessage());
+                    if (stackTraceOnIoErrors) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } catch (Exception e) {
@@ -121,6 +129,9 @@ public abstract class AbstractRemoteIntegrationLogWatcher extends TestName {
                 }
             } catch (Exception e) {
                 results.put(key, "NO REMOTE LOGS: " + e.getMessage());
+                if (stackTraceOnIoErrors) {
+                    e.printStackTrace();
+                }
             }
 
         }

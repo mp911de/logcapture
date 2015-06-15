@@ -1,16 +1,8 @@
 package biz.paluch.logcapture.common.jul;
 
-import biz.paluch.logcapture.common.LogEntry;
-import biz.paluch.logcapture.common.MessageCollectionStore;
-import biz.paluch.logcapture.common.Service;
-import biz.paluch.logcapture.common.StackTraceFilter;
-import biz.paluch.logcapture.common.StaticCollectionStoreInstance;
+import java.util.logging.*;
 
-import java.util.logging.ErrorManager;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.LogRecord;
-import java.util.logging.MemoryHandler;
+import biz.paluch.logcapture.common.*;
 
 /**
  * Proxy for Log4j Appender.
@@ -110,7 +102,7 @@ public class JulCollectingHandler extends MemoryHandler {
 
     public MessageCollectionStore getMessageCollectionStore() {
         if (messageCollectionStore == null) {
-            setMessageCollectionStore(Service.getFactory().createStore(target));
+            setMessageCollectionStore(Service.createStore(target));
         }
 
         return messageCollectionStore;

@@ -97,7 +97,7 @@ public class Log4jCollectingAppender extends AppenderSkeleton {
 
     public MessageCollectionStore getMessageCollectionStore() {
         if (messageCollectionStore == null) {
-            setMessageCollectionStore(Service.getFactory().createStore(target));
+            setMessageCollectionStore(Service.createStore(target));
         }
 
         return messageCollectionStore;
